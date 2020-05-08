@@ -77,7 +77,7 @@ export default {
             try {
                 let data = await login(this.loginForm)
                 let token = data.token
-                this.$store.commit('LOGIN_IN', token)
+                await this.$store.commit('LOGIN_IN', token)
                 this.$router.replace('/')
             } catch (e) {
                 console.log(e)

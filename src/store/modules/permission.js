@@ -14,8 +14,8 @@ export default {
         account: ''/** 用户角色 */
     },
     getters: {
-        LogRoutes() {
-           return  DynamicRoutes
+        LogRouter() {
+           return  router
         }
     },
     mutations: {
@@ -50,12 +50,7 @@ export default {
             let permissionList = await fetchPermission()
             commit('SET_AVATAR', permissionList.avatar)
             commit('SET_ACCOUNT', permissionList.name)
-            console.log(dynamicRouter)
-            console.log('------------------??? dynamicRouter')
             let routes = recursionRouter(permissionList.data, dynamicRouter)
-            console.log(routes)
-            console.log('-------------??? DynamicRoutes')
-            console.log(DynamicRoutes)
             let MainContainer = DynamicRoutes.find(v => v.path === '')
             let children = MainContainer.children
             commit('SET_CONTROL_LIST', [...children, ...dynamicRouter])
@@ -63,6 +58,7 @@ export default {
             commit('SET_MENU', children)
             let initialRoutes = router.options.routes
             router.addRoutes(DynamicRoutes)
+            console.log(router)
             commit('SET_PERMISSION', [...initialRoutes, ...DynamicRoutes])
         }
     }
